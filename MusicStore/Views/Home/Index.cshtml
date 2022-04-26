@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MusicStore.Models.Album>
+
+@{
+    ViewBag.Title = "Home Page";
+
+}
+
+@Html.TextArea("Text","hello <br /> world!")
+
+
+<textarea cols="20" id="text" name="text" rows="2">
+    hello &lt;br /&gt; world
+</textarea>
+
+
+<form action="/Albums/Search" method="get">
+    <input type="text" name="q"/>
+    <input type="submit" value="search" />
+
+</form>
+
+@using (Html.BeginForm("Search","Albums",FormMethod.Get,new { target="_blank",@class="btn"}))
+{
+    @Html.ValidationSummary(excludePropertyErrors:true)
+    <fieldset>
+        <legend>Edit Album</legend>
+    </fieldset>
+
+    <input type="text" name="q" />
+    <input type="submit" value="search" />
+}
+
+
+
+@{ Html.BeginForm("Search", "Albums", FormMethod.Get);}
+<legend>Edit Album</legend>
+<p>
+    <input type="text" name="q" />
+    <input type="submit" value="search" />
+    @Html.TextArea("text", "hello <br/> world")
+</p>
+@{ Html.EndForm();}
+
+
+
+
+<table class="table">
+
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.artist.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.genre.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>@Html.DisplayNameFor(model => model.Price)</th>
+        <th>@Html.DisplayNameFor(model => model.AlbumArtUrl)</th>
+
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(m => item.artist.Name)</td>
+            <td>@Html.DisplayFor(m => item.genre.Name)</td>
+            <td>@Html.DisplayFor(m => item.Title)</td>
+            <td>@Html.DisplayFor(m => item.Price)</td>
+            <td>@Html.DisplayFor(m => item.AlbumArtUrl)</td>
+            
+        </tr>
+    }
+</table>
